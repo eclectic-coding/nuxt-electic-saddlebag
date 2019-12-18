@@ -16,6 +16,7 @@
         :data-index="index"
       />
     </section>
+    <button class="btn button--green">Hello</button>
   </main>
 </template>
 

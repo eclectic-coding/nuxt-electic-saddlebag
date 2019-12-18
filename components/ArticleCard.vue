@@ -11,6 +11,7 @@
   export default {
     name: 'ArticleCard',
     props: {
+      // eslint-disable-next-line vue/require-default-prop
       post: Object
     },
     computed: {
