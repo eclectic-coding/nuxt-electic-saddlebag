@@ -21,7 +21,8 @@
 </template>
 
 <script>
-  import ArticleCard from '../components/ArticleCard'
+  import ArticleCard from '@/components/ArticleCard'
+
   export default {
     components: { ArticleCard },
     head() {
@@ -29,13 +30,19 @@
         title: 'Post Listing'
       }
     },
-    asyncData({ $axios }) {
+    asyncData({ $axios, error }) {
       return $axios
         .get('https://dev.to/api/articles?username=eclecticcoding')
         .then((response) => {
           return {
             posts: response.data
           }
+        })
+        .catch((e) => {
+          error({
+            statusCode: 503,
+            message: 'Unable to fetch events at this time. Please try again.'
+          })
         })
     }
   }
