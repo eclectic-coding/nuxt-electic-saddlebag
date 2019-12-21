@@ -1,6 +1,6 @@
 <template>
   <div style="margin: 1em">
-    <nuxt-link :to="'/posts/' + slug">
+    <nuxt-link :to="'/posts/' + id">
       <h3>{{ post.title }}</h3>
     </nuxt-link>
     <small style="margin-bottom: 0.5em">{{ parsedDate }}</small>
@@ -18,11 +18,14 @@
     },
     computed: {
       parsedDate() {
-        const postDate = new Date(this.post.created_at)
+        const postDate = new Date(this.post.published_at)
         return postDate.toDateString()
       },
-      slug() {
-        return this.post.slug
+      id() {
+        return this.post.id
+      },
+      article() {
+        return this.post.description
       }
     }
   }

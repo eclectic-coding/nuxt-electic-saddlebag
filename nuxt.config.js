@@ -1,5 +1,11 @@
+require('dotenv').config()
+
 export default {
+  env: {
+    baseUrl: process.env.BASEURL || 'http://localhost:3000/'
+  },
   mode: 'universal',
+  /*
   /*
    ** Headers of the page
    */

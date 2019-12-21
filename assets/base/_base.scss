@@ -15,11 +15,13 @@ html {
 a {
   color: $brand-color;
   text-decoration: none;
-
-  &:hover {
-    font-weight: bold;
-    text-decoration: underline;
-  }
 }
+
+a:hover {
+  color: $neutral-med;
+  font-weight: bold;
+  text-decoration: none;
+}
+
 
 

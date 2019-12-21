@@ -1,14 +1,7 @@
 <template>
   <main class="container">
+    <SiteHeader />
     <section>
-      <h1>
-        Eclectic Saddlebag
-      </h1>
-    </section>
-    <section>
-      <div style="padding: 1em 0">
-        Blog Feed from Dev.to
-      </div>
       <ArticleCard
         v-for="(post, index) in posts"
         :key="index"
@@ -21,29 +14,32 @@
 </template>
 
 <script>
+  import DevtoService from '@/services/DevtoService.js'
   import ArticleCard from '@/components/ArticleCard'
+  import SiteHeader from '@/components/SiteHeader'
 
   export default {
-    components: { ArticleCard },
+    components: {
+      ArticleCard,
+      SiteHeader
+    },
     head() {
       return {
         title: 'Post Listing'
       }
     },
-    asyncData({ $axios, error }) {
-      return $axios
-        .get('https://dev.to/api/articles?username=eclecticcoding')
-        .then((response) => {
-          return {
-            posts: response.data
-          }
+    async asyncData({ error }) {
+      try {
+        const { data } = await DevtoService.getArticles()
+        return {
+          posts: data
+        }
+      } catch (e) {
+        error({
+          statusCode: 503,
+          message: 'Unable to fetch events events at this time'
         })
-        .catch((e) => {
-          error({
-            statusCode: 503,
-            message: 'Unable to fetch events at this time. Please try again.'
-          })
-        })
+      }
     }
   }
 </script>
@@ -60,6 +56,6 @@
 
   h1,
   h3 {
-    margin: 1em 0;
+    margin: 1em;
   }
 </style>
