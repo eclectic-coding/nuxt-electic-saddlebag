@@ -2,7 +2,7 @@
   <div>
     <h2>{{ post.title }}</h2>
     <small>date | {{ post.tag_list }}</small>
-    <p>{{ post.body_markdown }}</p>
+    <p>{{ post.description }}</p>
   </div>
 </template>
 
